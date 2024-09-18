@@ -1,4 +1,5 @@
-from presentation.formularios.form_login import  FormLogin
+from presentation.formularios.form_login import FormLogin
 
-app = FormLogin()
-app.mainloop()
+if __name__ == "__main__":
+    app = FormLogin()  
+    app.ventana.mainloop()
