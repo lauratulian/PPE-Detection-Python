@@ -3,7 +3,7 @@ from tkinter import ttk
 import presentation.util.encoding_decoding as end_dec
 from tkinter import ttk, messagebox
 from tkinter.font import BOLD
-from presentation.formularios.form_maestro_design import FormMaestro
+from presentation.formularios.form_maestro import FormMaestro
 from presentation.formularios.form_login_design import FormLoginDesign
 from presentation.formularios.form_register import FormRegister
 from db.repository.auth_user_repository import AuthUserRepositroy

@@ -1,11 +1,15 @@
 import tkinter as tk
 from tkinter import font
 from config import COLOR_BARRA_SUPERIOR, COLOR_MENU_LATERAL, COLOR_CUERPO_PRINCIPAL, COLOR_MENU_CURSOR_ENCIMA
+from tkinter import filedialog, messagebox, ttk
+from ultralytics import YOLO
+from tkfontawesome import icon_to_image
 import presentation.util.util_ventana as util_ventana
 import presentation.util.util_imagenes as util_img
-import controller.detection as cd
 
-class FormMaestro(tk.Tk):
+class FormMaestroDesign(tk.Tk):
+    
+    root = tk.Tk()
 
     def __init__(self):
         super().__init__()
@@ -24,17 +28,17 @@ class FormMaestro(tk.Tk):
         util_ventana.centrar_ventana(self, w, h)        
 
     def paneles(self):        
-         # Crear paneles: barra superior, menú lateral y cuerpo principal
-        self.barra_superior = tk.Frame(
-            self, bg=COLOR_BARRA_SUPERIOR, height=50)
-        self.barra_superior.pack(side=tk.TOP, fill='both')      
+        # Crear paneles: barra superior, menú lateral y cuerpo principal
+        barra_superior = tk.Frame(self.root, bg=COLOR_BARRA_SUPERIOR, height=50)
+        barra_superior.pack(side=tk.TOP, fill='both')
 
-        self.menu_lateral = tk.Frame(self, bg=COLOR_MENU_LATERAL, width=150)
-        self.menu_lateral.pack(side=tk.LEFT, fill='both', expand=False) 
-        
-        self.cuerpo_principal = tk.Frame(
-            self, bg=COLOR_CUERPO_PRINCIPAL)
-        self.cuerpo_principal.pack(side=tk.RIGHT, fill='both', expand=True)
+        menu_lateral = tk.Frame(self.root, bg=COLOR_MENU_LATERAL, width=150)
+        menu_lateral.pack(side=tk.LEFT, fill='both', expand=False)
+
+        cuerpo_principal = tk.Frame(self.root, bg=COLOR_CUERPO_PRINCIPAL)
+        cuerpo_principal.pack(side=tk.RIGHT, fill='both', expand=True)
+
+        return barra_superior, menu_lateral, cuerpo_principal
     
     def controles_barra_superior(self):
         # Configuración de la barra superior
@@ -64,12 +68,11 @@ class FormMaestro(tk.Tk):
         alto_menu = 2
         font_awesome = font.Font(family='FontAwesome', size=15)
          
-
         # Botones del menú lateral
         
-        self.buttonDashBoard = tk.Button(self.menu_lateral, command=cd.detectar_video)         
-        self.buttonProfile = tk.Button(self.menu_lateral, command=cd.detectar_imagen)     
-        self.buttonPicture = tk.Button(self.menu_lateral, command=cd.abrir_camara) 
+        self.buttonDashBoard = tk.Button(self.menu_lateral, command=self.detectar_video)         
+        self.buttonProfile = tk.Button(self.menu_lateral, command=self.detectar_imagen)     
+        self.buttonPicture = tk.Button(self.menu_lateral, command=self.abrir_camara) 
         self.buttonInfo = tk.Button(self.menu_lateral)        
         self.buttonSettings = tk.Button(self.menu_lateral)
 
@@ -115,4 +118,12 @@ class FormMaestro(tk.Tk):
             self.menu_lateral.pack_forget()
         else:
             self.menu_lateral.pack(side=tk.LEFT, fill='y')
+        
+    def abrir_camara():
+        pass
 
+    def detectar_imagen():
+        pass
+
+    def detectar_video():
+        pass
