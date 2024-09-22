@@ -3,7 +3,7 @@ from tkinter import ttk
 import presentation.util.encoding_decoding as end_dec
 from tkinter import ttk, messagebox
 from tkinter.font import BOLD
-from presentation.formularios.form_maestro_design import FormMaestroDesign
+from presentation.formularios.form_maestro_design import FormMaestro
 from presentation.formularios.form_login_design import FormLoginDesign
 from presentation.formularios.form_register import FormRegister
 from db.repository.auth_user_repository import AuthUserRepositroy
@@ -22,7 +22,7 @@ class FormLogin(FormLoginDesign):
             self.isPassword(self.password.get(), user_db)
 
     def userRegister(self):
-        FormRegister().mainloop()
+        FormRegister()
 
     def isUser(self, user: Auth_User):
         status: bool = True
@@ -36,7 +36,7 @@ class FormLogin(FormLoginDesign):
         b_password = end_dec.decrypt(user.password)
         if(password == b_password):
             self.ventana.destroy()
-            FormMaestroDesign()
+            FormMaestro()
         else:
             messagebox.showerror(
                 message="La contraseña no es correcta", title="Mensaje")

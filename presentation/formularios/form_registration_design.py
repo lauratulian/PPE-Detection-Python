@@ -16,9 +16,9 @@ class FormRegisterDesigner():
         logo = util_img.leer_imagen("./presentation/imagenes/logo.png", (150, 150))
         # frame_logo
         frame_logo = tk.Frame(self.ventana, bd=0, width=200,
-                              relief=tk.SOLID, padx=10, pady=10, bg='#F87474')
+                              relief=tk.SOLID, padx=10, pady=10, bg='#2b56a1')
         frame_logo.pack(side="left", expand=tk.YES, fill=tk.BOTH)
-        label = tk.Label(frame_logo, image=logo, bg='#F87474')
+        label = tk.Label(frame_logo, image=logo, bg='#2b56a1')
         label.place(x=0, y=0, relwidth=1, relheight=1)
 
         # frame_form
@@ -62,7 +62,7 @@ class FormRegisterDesigner():
         self.confirmation.config(show="*")
 
         inicio = tk.Button(frame_form_fill, text="Registrar", font=(
-            'Times', 15), bg='#F87474', bd=0, fg="#fff", command=self.register)
+            'Times', 15), bg='#2b56a1', bd=0, fg="#fff", command=self.register)
         inicio.pack(fill=tk.X, padx=20, pady=20)
         inicio.bind("<Return>", (lambda event: self.register()))
     

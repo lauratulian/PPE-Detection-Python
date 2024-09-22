@@ -25,9 +25,9 @@ class FormLoginDesign():
         
         # frame_logo
         frame_logo = tk.Frame(self.ventana, bd=0, width=300,
-                              relief=tk.SOLID, padx=10, pady=10, bg='#3a7ff6')
+                              relief=tk.SOLID, padx=10, pady=10, bg='#1f3e5c')
         frame_logo.pack(side="left", expand=tk.YES, fill=tk.BOTH)
-        label = tk.Label(frame_logo, image=logo, bg='#3a7ff6')
+        label = tk.Label(frame_logo, image=logo, bg='#1f3e5c')
         label.place(x=0, y=0, relwidth=1, relheight=1)
 
         # frame_form
@@ -65,13 +65,13 @@ class FormLoginDesign():
         self.password.config(show="*")
 
         inicio = tk.Button(frame_form_fill, text="Iniciar sesion", font=(
-            'Times', 15), bg='#3a7ff6', bd=0, fg="#fff", command=self.verificar)
+            'Times', 15), bg='#1f3e5c', bd=0, fg="#fff", command=self.verificar)
         inicio.pack(fill=tk.X, padx=20, pady=20)
         inicio.bind("<Return>", (lambda event: self.verificar()))
         
         
         inicio = tk.Button(frame_form_fill, text="Registrar usuario", font=(
-            'Times', 15), bg='#fcfcfc', bd=0, fg="#3a7ff6", command=self.userRegister)
+            'Times', 15), bg='#fcfcfc', bd=0, fg="#1f3e5c", command=self.userRegister)
         inicio.pack(fill=tk.X, padx=20, pady=20)
         inicio.bind("<Return>", (lambda event: self.userRegister()))
         

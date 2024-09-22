@@ -9,12 +9,13 @@ import presentation.util.util_imagenes as util_img
 from PIL import Image, ImageTk
 import cv2
 import numpy as np
+import fitz  
 
-class FormMaestroDesign(tk.Tk):
+class FormMaestro(tk.Tk):
 
     def __init__(self):
         super().__init__()
-        self.logo = util_img.leer_imagen("./presentation/imagenes/logo.png", (100, 100))
+        self.logo = util_img.leer_imagen("./presentation/imagenes/logo.png", (200, 200))
         self.config_window()
         self.model = YOLO('./best.pt')
         self.cap = None
@@ -24,6 +25,7 @@ class FormMaestroDesign(tk.Tk):
         self.controles_cuerpo()
         self.content_label = tk.Label(self.cuerpo_principal)  
         self.content_label.pack()
+
     
     def config_window(self):
         # Configuración inicial de la ventana
@@ -47,51 +49,49 @@ class FormMaestroDesign(tk.Tk):
         # Configuración de la barra superior
         font_awesome = font.Font(family='FontAwesome', size=12)
 
-        # Etiqueta de título
-        self.labelTitulo = tk.Label(self.barra_superior, text="UTN")
-        self.labelTitulo.config(fg="#fff", font=(
-            "Roboto", 15), bg=COLOR_BARRA_SUPERIOR, pady=10, width=16)
-        self.labelTitulo.pack(side=tk.LEFT)
-
-        # Botón del menú lateral
+         # Botón del menú lateral
         self.buttonMenuLateral = tk.Button(self.barra_superior, text="\uf0c9", font=font_awesome,
                                         command=self.toggle_panel, bd=0, bg=COLOR_BARRA_SUPERIOR, fg="white")
         self.buttonMenuLateral.pack(side=tk.LEFT)
+
+        # Etiqueta de título
+        self.labelTitulo = tk.Label(self.barra_superior, text="Grupo 8")
+        self.labelTitulo.config(fg="#fff", font=(
+            'Roboto', 15), bg=COLOR_BARRA_SUPERIOR, pady=10, width=16)
+        self.labelTitulo.pack(side=tk.LEFT)
 
         # Etiqueta de correo electrónico
         self.labelEmail = tk.Label(
             self.barra_superior, text="utn@frro.edu.ar")
         self.labelEmail.config(fg="#fff", font=(
-            "Roboto", 10), bg=COLOR_BARRA_SUPERIOR, padx=10, width=20)
+            'Times', 10), bg=COLOR_BARRA_SUPERIOR, padx=10, width=20)
         self.labelEmail.pack(side=tk.RIGHT)
 
     
     def controles_menu_lateral(self):
-        # Configuración del menú lateral
         ancho_menu = 20
         alto_menu = 2
         font_awesome = font.Font(family='FontAwesome', size=15)
-         
+
         # Botones del menú lateral
-        
-        self.buttonDashBoard = tk.Button(self.menu_lateral, command=self.upload_file)         
-        self.buttonProfile = tk.Button(self.menu_lateral, command=self.upload_file)     
-        self.buttonPicture = tk.Button(self.menu_lateral, command=self.start_camera_detection)  
-        self.buttonInfo = tk.Button(self.menu_lateral)        
-        self.buttonSettings = tk.Button(self.menu_lateral)
+        self.buttonLive = tk.Button(self.menu_lateral, command=self.start_camera_detection)
+        self.buttonUpload = tk.Button(self.menu_lateral, command=self.upload_file)
+        self.buttonInfo = tk.Button(self.menu_lateral, command=lambda: self.open_pdf("./presentation/documentos/info.pdf"))
+        self.buttonQuit = tk.Button(self.menu_lateral, command=self.destroy)
 
         buttons_info = [
-            ("Cargar Video", "\uf109", self.buttonDashBoard),
-            ("Cargar Imagen", "\uf007", self.buttonProfile),
-            ("Video en vivo", "\uf03e", self.buttonPicture),
+            ("Video en vivo", "\uf109", self.buttonLive),
+            ("Subir archivo", "\uf007", self.buttonUpload),
             ("Info", "\uf129", self.buttonInfo),
-            ("Settings", "\uf013", self.buttonSettings)
         ]
 
         for text, icon, button in buttons_info:
-            self.configurar_boton_menu(button, text, icon, font_awesome, ancho_menu, alto_menu)                    
-            button.pack(side=tk.TOP, fill=tk.X)
+            self.configurar_boton_menu(button, text, icon, font_awesome, ancho_menu, alto_menu)
 
+        self.configurar_boton_menu(self.buttonQuit, "Salir", "\uf013", font_awesome, ancho_menu, alto_menu)
+        self.buttonQuit.pack(side=tk.BOTTOM)   
+
+        
     def controles_cuerpo(self):
         # Imagen en el cuerpo principal
         label = tk.Label(self.cuerpo_principal, image=self.logo,
@@ -200,4 +200,22 @@ class FormMaestroDesign(tk.Tk):
             self.process_video(file_path)
         else:
             messagebox.showerror("Error", "Tipo de archivo no soportado.")
-    
+
+    def open_pdf(self, pdf_path):
+        try:
+            pdf_document = fitz.open(pdf_path)
+            
+            page = pdf_document.load_page(0)
+            pix = page.get_pixmap()
+
+            image = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+
+            image = image.resize((700, 700), Image.Resampling.LANCZOS)
+
+            image_tk = ImageTk.PhotoImage(image)
+
+            self.content_label.config(image=image_tk)
+            self.content_label.image = image_tk  
+
+        except Exception as e:
+            messagebox.showerror("Error", f"No se pudo cargar el PDF: {e}")
