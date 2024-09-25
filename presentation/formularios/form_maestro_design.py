@@ -14,7 +14,7 @@ class FormMaestro(tk.Tk):
 
     def __init__(self):
         super().__init__()
-        self.logo = util_img.leer_imagen(r"presentation\imagenes\logo.png", (100, 100))
+        self.logo = util_img.leer_imagen(r"presentation\imagenes\logo.png", (200, 200))
         self.config_window()
         self.model = YOLO('./best.pt')
         self.cap = None
@@ -90,12 +90,17 @@ class FormMaestro(tk.Tk):
                             command=self.destroy, bd=0, bg=COLOR_MENU_LATERAL, fg="white", font=font_awesome,
                             padx=10)
 
-        buttons = [self.buttonLive, self.buttonUpload, self.buttonInfo, self.buttonQuit]
+        buttons = [self.buttonLive, self.buttonUpload, self.buttonInfo]
 
         for button in buttons:
             button.pack(side=tk.TOP, pady=20, anchor="w", fill=tk.X)
             button.bind("<Enter>", self.on_enter)
             button.bind("<Leave>", self.on_leave)
+
+    # Empacar el botón "Salir" al final del menú
+        self.buttonQuit.pack(side=tk.BOTTOM, pady=20, anchor="w", fill=tk.X)
+        self.buttonQuit.bind("<Enter>", self.on_enter)
+        self.buttonQuit.bind("<Leave>", self.on_leave)
         
 
     def controles_cuerpo(self):
