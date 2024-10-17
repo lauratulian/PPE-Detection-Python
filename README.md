@@ -18,6 +18,23 @@ El objetivo principal es implementar un sistema que analice imágenes y videos s
 
 Este proyecto proporciona una solución automatizada para la mejora de la seguridad en el lugar de trabajo, eliminando la necesidad de inspecciones manuales y reduciendo los riesgos asociados a los accidentes laborales.
 
+## Ejemplos visuales del sistema
+
+A continuación, se presentan algunas capturas de pantalla del sistema en funcionamiento:
+
+- Formulario de inicio de sesión.
+- Interfaz principal.
+- Detección de EPP en imágenes y videos.
+
+### Formulario de Inicio de Sesión
+![Inicio de Sesión](https://github.com/lauratulian/PPE-Detection-Python/blob/main/Imagenes/Inicio_de_Sesion.png)
+
+### Interfaz Principal
+![Pantalla Principal](https://github.com/lauratulian/PPE-Detection-Python/blob/main/Imagenes/Principal.png)
+
+### Detección de PPE en Video
+![Detección en Video](https://github.com/lauratulian/PPE-Detection-Python/blob/main/Imagenes/Deteccion_Video.png)
+
 ## Documentación
 
 Para más información, revisar el archivo [Narrativa-TPI-PPEDetection-Grupo8.pdf](https://github.com/lauratulian/PPE-Detection-Python/blob/main/Narrativa-TPI-PPEDetection-Grupo8.pdf).
