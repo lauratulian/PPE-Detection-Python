@@ -20,4 +20,4 @@ Este proyecto proporciona una solución automatizada para la mejora de la seguri
 
 ## Documentación
 
-Para más información, revisar el archivo [Narrativa-TPI-PPEDetection-Grupo8.pdf](#).
+Para más información, revisar el archivo [Narrativa-TPI-PPEDetection-Grupo8.pdf](https://github.com/lauratulian/PPE-Detection-Python/blob/main/Narrativa-TPI-PPEDetection-Grupo8.pdf).
